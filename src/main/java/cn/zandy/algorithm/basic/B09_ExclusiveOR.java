@@ -38,8 +38,8 @@ public class B09_ExclusiveOR {
     private static void doProblem1(int a, int b) {
         System.out.println("input      : a=" + a + ", b=" + b);
         a = a ^ b;
-        b = a ^ b; // 等式右侧带入a:    (a^b) ^ b = a ^ (b^b) = a ^ 0 = a
-        a = a ^ b; // 等式右侧带入a和b:  (a^b) ^ a = b
+        b = a ^ b; // 等式右侧代入a:    (a^b) ^ b = a ^ (b^b) = a ^ 0 = a
+        a = a ^ b; // 等式右侧代入a和b:  (a^b) ^ a = b
         System.out.println("after swap : a=" + a + ", b=" + b);
     }
 
