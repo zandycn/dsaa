@@ -1,5 +1,6 @@
 package cn.zandy.algorithm.basic;
 
+import cn.zandy.algorithm.util.ArrayUtils;
 import cn.zandy.algorithm.util.Comparator;
 
 /**
@@ -14,7 +15,7 @@ import cn.zandy.algorithm.util.Comparator;
  */
 public class B01_SelectionSort {
 
-    private void selectionSort(int[] arr) {
+    private void sort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
         }
@@ -37,20 +38,14 @@ public class B01_SelectionSort {
             }
 
             // 把最小值交换到 i 位置
-            swap(arr, i, minValueIndex);
+            ArrayUtils.swap(arr, i, minValueIndex);
         }
-    }
-
-    private void swap(int[] arr, int idx1, int idx2) {
-        int temp = arr[idx1];
-        arr[idx1] = arr[idx2];
-        arr[idx2] = temp;
     }
 
     /**
      * 使用对数器测试.
      */
     public static void main(String[] args) {
-        Comparator.compareForSort(new B01_SelectionSort()::selectionSort);
+        Comparator.compareForSort(new B01_SelectionSort()::sort);
     }
 }

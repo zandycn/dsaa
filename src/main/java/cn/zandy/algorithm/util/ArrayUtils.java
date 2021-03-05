@@ -77,4 +77,16 @@ public class ArrayUtils {
             b.append(", ");
         }
     }
+
+    public static void swap(int[] arr, int idx1, int idx2) {
+        int temp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = temp;
+    }
+
+    public static void swap1(int[] arr, int idx1, int idx2) {
+        arr[idx1] = arr[idx1] ^ arr[idx2];
+        arr[idx2] = arr[idx1] ^ arr[idx2];
+        arr[idx1] = arr[idx1] ^ arr[idx2];
+    }
 }
