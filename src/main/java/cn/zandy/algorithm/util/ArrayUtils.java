@@ -78,6 +78,32 @@ public class ArrayUtils {
         }
     }
 
+    public static String toFormattedString(int[] a, int leftIndex, int rightIndex) {
+        if (a == null) {
+            return "null";
+        }
+
+        if (leftIndex > rightIndex) {
+            return "[]";
+        }
+
+        StringBuilder iBuilder = new StringBuilder();
+        StringBuilder oBuilder = new StringBuilder();
+        iBuilder.append("Index|");
+        oBuilder.append("Array[");
+
+        for (int i = leftIndex; ; i++) {
+            iBuilder.append(String.format("%5s", i));
+            oBuilder.append(String.format("%5s", a[i]));
+
+            if (i == rightIndex) {
+                return iBuilder.append("|\n").append(oBuilder).append(']').toString();
+            }
+            iBuilder.append("| ");
+            oBuilder.append(", ");
+        }
+    }
+
     public static void swap(int[] arr, int idx1, int idx2) {
         int temp = arr[idx1];
         arr[idx1] = arr[idx2];
@@ -88,5 +114,10 @@ public class ArrayUtils {
         arr[idx1] = arr[idx1] ^ arr[idx2];
         arr[idx2] = arr[idx1] ^ arr[idx2];
         arr[idx1] = arr[idx1] ^ arr[idx2];
+    }
+
+    public static void main(String[] args) {
+        int[] arr = generateRandomArray(10, 10);
+        System.out.println(toFormattedString(arr, 0, arr.length - 1));
     }
 }
