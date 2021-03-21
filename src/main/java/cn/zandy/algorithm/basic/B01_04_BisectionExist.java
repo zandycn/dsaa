@@ -7,7 +7,7 @@ import java.util.Arrays;
 /**
  * 在一个【有序】数组中，找某个数是否存在.
  */
-public class B04_BisectionExist {
+public class B01_04_BisectionExist {
 
     private static final boolean DEBUG = false;
 
@@ -72,7 +72,7 @@ public class B04_BisectionExist {
     }
 
     public static void main(String[] args) {
-        B04_BisectionExist o = new B04_BisectionExist();
+        B01_04_BisectionExist o = new B01_04_BisectionExist();
         int searchKey = 50;
 
         //int[] tArr = {13, 21, 29, 50, 56, 68, 81, 87};

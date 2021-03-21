@@ -5,14 +5,14 @@ import cn.zandy.algorithm.util.ArrayUtils;
 import java.util.Arrays;
 
 /**
- * 在一个【有序】数组中，找 <= 某个数最右侧的位置.
+ * 在一个【有序】数组中，找 >= 某个数最左侧的位置.
  *
  * 约定：
  * · 如果数组为空，返回 -100
- * · 如果传入数字比数组中所有元素都大，返回 数组的长度
- * · 如果传入数字比数组中所有元素都小，返回 -1
+ * · 如果传入数字比数组中所有元素都大，返回 -1
+ * · 如果传入数字比数组中所有元素都小，返回 0
  */
-public class B06_BisectionFirstLTE {
+public class B01_05_BisectionFirstGTE {
 
     private static final boolean DEBUG = false;
 
@@ -50,10 +50,10 @@ public class B06_BisectionFirstLTE {
                 System.out.println("------------");
             }
 
-            if (arr[midIndex] > n) {
+            if (arr[midIndex] >= n) {
+                targetIndex = midIndex;
                 r = midIndex - 1;
             } else {
-                targetIndex = midIndex;
                 l = midIndex + 1;
             }
         }
@@ -74,8 +74,8 @@ public class B06_BisectionFirstLTE {
 
         int targetIndex = NOT_FOUND_FLAG;
 
-        for (int i = arr.length - 1; i >= 0; i--) {
-            if (arr[i] <= n) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] >= n) {
                 targetIndex = i;
                 break;
             }
@@ -85,7 +85,7 @@ public class B06_BisectionFirstLTE {
     }
 
     public static void main(String[] args) {
-        B06_BisectionFirstLTE o = new B06_BisectionFirstLTE();
+        B01_05_BisectionFirstGTE o = new B01_05_BisectionFirstGTE();
         int searchKey;
 
         long start = System.currentTimeMillis();

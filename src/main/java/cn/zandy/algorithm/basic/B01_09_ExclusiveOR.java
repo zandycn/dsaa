@@ -11,7 +11,7 @@ package cn.zandy.algorithm.basic;
  * 题目三：一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到并打印这两种数
  * 题目四：找出一个整数对应二进制数字，出现1的次数
  */
-public class B09_ExclusiveOR {
+public class B01_09_ExclusiveOR {
 
     public static void main(String[] args) {
         System.out.println("------ p1 ------");
