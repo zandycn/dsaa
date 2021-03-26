@@ -6,7 +6,7 @@ package cn.zandy.algorithm.basic;
  * <p>
  * 由于二进制的特性，决定了 2^n 对应的二进制数字串只有一位是1，其它位都位0
  * 对于一个 非2^n 的正整数，寻找比其大的第一个 2^n，方法是:
- * · 1.把 该数字最高位 及其 右面的每一位都变成1
+ * · 1.把 该二进制数【最左侧第一次出现的1】的右面每一位都变成1
  * · 2.在得到的数字基础上加1
  * <p>
  * 比如: 数字9 (二进制 0000 1010)，寻找比其稍大的 2^n:
@@ -26,7 +26,7 @@ public class Get_a_power_of_two {
     public static int get(int number, boolean strict) {
         printf("number", number);
 
-        /* "number - 1" 是为了实现当 number 为等比数列 2^n 通项时，通过该方法获取到的是当前值(2^n)，而不是下一项(2^(n+1)) */
+        /* "number - 1" 是为了实现当 number 是二的整数次幂时，通过该方法获取到的是当前值(2^n)，而不是下一项(2^n * 2)) */
         int n = strict ? number : number - 1;
         printf("strict(" + strict + "), n", n);
 
@@ -38,7 +38,7 @@ public class Get_a_power_of_two {
         printf("(n |= n >>> 4)", n);
         n |= n >>> 8;
         printf("(n |= n >>> 8)", n);
-        n |= n >>> 16; // 共移动32位，因为 int 4 字节
+        n |= n >>> 16; // 共移动32位，因为 int 4 字节共32位
         printf("(n |= n >>> 16)", n);
 
         // return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
