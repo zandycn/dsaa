@@ -47,6 +47,19 @@ public class ArrayUtils {
         return copy;
     }
 
+    public static int[] copy1(int[] arr) {
+        if (arr == null) {
+            throw new NullPointerException("无效的数组！");
+        }
+
+        int[] copy = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            copy[i] = arr[i];
+        }
+
+        return copy;
+    }
+
     /**
      * java.util.Arrays.equals(int[] a, int[] a2)
      */
