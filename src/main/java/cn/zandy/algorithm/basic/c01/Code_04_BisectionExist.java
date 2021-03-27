@@ -1,13 +1,16 @@
-package cn.zandy.algorithm.basic;
+package cn.zandy.algorithm.basic.c01;
 
 import cn.zandy.algorithm.util.ArrayUtils;
+import cn.zandy.algorithm.util.CompareUtils;
 
 import java.util.Arrays;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 /**
  * 在一个【有序】数组中，找某个数是否存在.
  */
-public class B01_04_BisectionExist {
+public class Code_04_BisectionExist {
 
     private static final boolean DEBUG = false;
 
@@ -34,7 +37,9 @@ public class B01_04_BisectionExist {
         while (l <= r) {
             loopCount++;
 
-            // R-L == 0 时，mi=L=R; R-L == 1 时，mi=L<R; R-L >= 2 时，L<mi<R
+            // R-L == 0 时，L=mi=R
+            // R-L == 1 时，L=mid<R
+            // R-L >= 2 时，L<mi<R
             // 一直向左二分(至R<L)，不一定会出现 R=L 的情况；一直向右二分(至L>R)，一定会出现 R=L 的情况
             if (l == r) {
                 equalCount++;
@@ -72,59 +77,12 @@ public class B01_04_BisectionExist {
     }
 
     public static void main(String[] args) {
-        B01_04_BisectionExist o = new B01_04_BisectionExist();
-        int searchKey = 50;
+        Code_04_BisectionExist ins = new Code_04_BisectionExist();
 
-        //int[] tArr = {13, 21, 29, 50, 56, 68, 81, 87};
-        //System.out.println(e.exist(tArr, searchKey));
-        //System.out.println(Arrays.binarySearch(tArr, searchKey));
+        Supplier<Integer> kenGen = () -> 50;
 
-        long start = System.currentTimeMillis();
+        BiFunction<int[], Integer, Boolean> f2 = (arr, key) -> Arrays.binarySearch(arr, key) >= 0;
 
-        int totalTimes = 20000;
-        int initArrayLength = 10;
-        int maxArrayLength = 500;
-
-        int[] arr;
-        boolean myResult;
-        int jdkResult;
-        boolean same;
-        int tc = 0, ec = 0, sc = 0, dc = 0;
-
-        for (int t = 1; t <= totalTimes; t++) {
-
-            for (int i = initArrayLength; i <= maxArrayLength; i++) {
-                tc++;
-
-                arr = ArrayUtils.generateRandomArray(i, 100);
-                Arrays.sort(arr);
-
-                try {
-                    myResult = o.exist(arr, searchKey);
-                } catch (Exception ex) {
-                    System.out.println("exception sample: " + ArrayUtils.toString(arr));
-                    ec++;
-                    ex.printStackTrace();
-                    continue;
-                }
-
-                jdkResult = Arrays.binarySearch(arr, searchKey);
-                same = (myResult == (jdkResult >= 0));
-
-                if (DEBUG) {
-                    System.out.println("myResult: " + myResult + ", jdkResult: " + jdkResult + ", isSame: " + same);
-                }
-
-                if (!same) {
-                    System.out.println("different sample: " + ArrayUtils.toString(arr));
-                    dc++;
-                } else {
-                    sc++;
-                }
-            }
-        }
-
-        System.out.println("耗时：" + ((System.currentTimeMillis() - start) / 1000) + "秒");
-        System.out.println("tc=" + tc + ", sc=" + sc + ", dc=" + dc + ", ec=" + ec);
+        CompareUtils.compare4Bisection(ins::exist, f2, kenGen, 20000, 10, 500, DEBUG);
     }
 }

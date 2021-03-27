@@ -1,7 +1,7 @@
-package cn.zandy.algorithm.basic;
+package cn.zandy.algorithm.basic.c01;
 
 import cn.zandy.algorithm.util.ArrayUtils;
-import cn.zandy.algorithm.util.Comparator;
+import cn.zandy.algorithm.util.CompareUtils;
 
 /**
  * 冒泡排序.
@@ -18,7 +18,7 @@ import cn.zandy.algorithm.util.Comparator;
  * …
  * 确定下标 1 是最大值，最后在 arr[0～1] 范围上，重复上面的过程，但最后一步是 arr[0] 和 arr[1]，谁大谁来到 index=1 位置
  */
-public class B01_02_BubbleSort {
+public class Code_02_BubbleSort {
 
     private void sort(int[] arr) {
         if (arr == null || arr.length < 2) {
@@ -47,6 +47,6 @@ public class B01_02_BubbleSort {
      * 使用对数器测试.
      */
     public static void main(String[] args) {
-        Comparator.compareForSort(new B01_02_BubbleSort()::sort);
+        CompareUtils.compareSortResultWithJDK(new Code_02_BubbleSort()::sort);
     }
 }

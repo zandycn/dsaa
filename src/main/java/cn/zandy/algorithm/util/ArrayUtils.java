@@ -15,6 +15,25 @@ public class ArrayUtils {
         return arr;
     }
 
+    /**
+     * 生成相邻两个数不等的数组.
+     */
+    public static int[] generateAdjacentUnequalArray(int len, int base) {
+        int[] arr = new int[len];
+
+        int tmp;
+        for (int i = 0; i < arr.length; i++) {
+            tmp = (int) (Math.random() * (base + 1));
+            if (i % 2 == 0) {
+                arr[i] = tmp << 1;
+            } else {
+                arr[i] = tmp << 1 | 1;
+            }
+        }
+
+        return arr;
+    }
+
     public static int[] copy(int[] arr) {
         if (arr == null || arr.length == 0) {
             throw new NullPointerException("无效的数组！");

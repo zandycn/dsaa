@@ -1,49 +1,49 @@
-package cn.zandy.algorithm.basic;
+package cn.zandy.algorithm.basic.c03;
 
-import cn.zandy.algorithm.util.Comparator;
+import cn.zandy.algorithm.util.CompareUtils;
 
 /**
  * 归并排序.
  *
  * 给定数组 由小到大 排序：
  *
- * 递归实现（左侧有序，右侧有序，merge两侧整体有序）
- *
- * 不熟练时，先画递归脑图来观察，再实现代码
+ * 这里采用【递归】和【非递归】两种方式实现
  */
-public class B03_01_MergeSort {
+public class Code_01_MergeSort {
 
-    private void sort(int[] arr) {
-        range(arr, 0, arr.length - 1);
+    private void recurSort(int[] arr) {
+        recursion(arr, 0, arr.length - 1);
     }
 
     /**
-     * 递归函数定义：让数组 arr 在下标 l->r 范围上有序（由小到大）
+     * 【递归实现】
+     * 左侧排好序，右侧排好序，merge两侧让整体有序。注：不熟练时，先画递归脑图来观察，再实现代码
+     *
+     * 递归函数定义————让数组 arr 在下标 l->r 范围上有序（由小到大）
+     *
+     * 时间复杂度：符合Master公式前提，T(N)=2*T(N/2) + O(N) 所以是 O(N*logN)
      */
-    private void range(int[] arr, int l, int r) {
-        if (arr == null) {
-            throw new NullPointerException("待处理数组为null");
-        }
-
-        if (arr.length < 2) {
+    private void recursion(int[] arr, int l, int r) {
+        if (arr == null || arr.length < 2) {
             return;
         }
 
         if (l > r || l < 0 || r > arr.length - 1) {
-            throw new IllegalArgumentException("位置参数无效");
+            throw new IllegalArgumentException("传入位置参数错误");
         }
 
-        // "范围"只对应数组中一个元素，那一定有序，不需要再拆分，直接返回
+        // "范围"只对应数组中一个元素，那一定有序，不需要再拆分，直接返回（这种情况就是 Base Case）
         if (l == r) {
             return;
         }
 
-        int mid = l + ((r - l) >> 2);
-        range(arr, l, mid);
-        range(arr, mid + 1, r);
+        int mid = l + ((r - l) >> 1);
+        recursion(arr, l, mid);
+        recursion(arr, mid + 1, r);
         merge(arr, l, mid, r);
     }
 
+    // 2N, 去掉常数项为 O(N)
     private void merge(int[] arr, int l, int mid, int r) {
         int li = l;       // 左侧区域开始位置的"指针"
         int ri = mid + 1; // 右侧区域开始位置的"指针"
@@ -79,7 +79,20 @@ public class B03_01_MergeSort {
         }
     }
 
+    /**
+     * 非递归实现
+     *
+     * TODO
+     */
+    private void iterativeSort(int[] arr) {
+        int point = 1;
+
+        while (point < arr.length - 1) {
+
+        }
+    }
+
     public static void main(String[] args) {
-        Comparator.compareForSort(new B03_01_MergeSort()::sort);
+        CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::recurSort);
     }
 }

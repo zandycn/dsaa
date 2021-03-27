@@ -1,4 +1,4 @@
-package cn.zandy.algorithm.basic;
+package cn.zandy.algorithm.basic.c01;
 
 /**
  * 异或运算（无进位相加）的性质：
@@ -11,7 +11,7 @@ package cn.zandy.algorithm.basic;
  * 题目三：一个数组中有两种数出现了奇数次，其他数都出现了偶数次，怎么找到并打印这两种数
  * 题目四：找出一个整数对应二进制数字，出现1的次数
  */
-public class B01_09_ExclusiveOR {
+public class Code_09_ExclusiveOR {
 
     public static void main(String[] args) {
         System.out.println("------ p1 ------");
@@ -53,6 +53,7 @@ public class B01_09_ExclusiveOR {
         arr[0] = arr[0] ^ arr[1];
         System.out.println("after swap : a=" + arr[0] + ", b=" + arr[1]);
 
+        System.out.println("------- 同一块内存区域 -------");
         System.out.println("input      : a=" + arr[0] + ", a=" + arr[0]);
         arr[0] = arr[0] ^ arr[0];
         arr[0] = arr[0] ^ arr[0];
@@ -92,26 +93,26 @@ public class B01_09_ExclusiveOR {
              分析到这里，我们就可以根据上一题的思路，找出来第一个奇数
          */
 
-        int eorAll1 = 0;
+        int eor1 = 0;
         for (int i = 0; i < arr.length; i++) {
-            if ((arr[i] & rigthOne) == rigthOne) { // 找到右数第 5 位是 1 的元素集合
-                eorAll1 ^= arr[i];
+            if ((arr[i] & rigthOne) == rigthOne) { // 找到右数第 5 位是 1 的元素
+                eor1 ^= arr[i];
             }
         }
 
-        System.out.println("一种出现了奇数次的数字：" + eorAll1);
-        System.out.println("另一种出现了奇数次的数字：" + (eor ^ eorAll1)); // a^b=c, 那么 b=a^b^a=c^a
+        System.out.println("一种出现了奇数次的数字：" + eor1);
+        System.out.println("另一种出现了奇数次的数字：" + (eor ^ eor1)); // a^b=c, 那么 b=a^b^a=c^a
 
         // ------------
 
-        int eorAll0 = 0;
+        int eor0 = 0;
         for (int i = 0; i < arr.length; i++) {
-            if ((arr[i] & rigthOne) == 0) { // 找到右数第 5 位是 0 的元素集合
-                eorAll0 ^= arr[i];
+            if ((arr[i] & rigthOne) == 0) { // 找到右数第 5 位是 0 的元素
+                eor0 ^= arr[i];
             }
         }
-        System.out.println("一种出现了奇数次的数字：" + eorAll0);
-        System.out.println("另一种出现了奇数次的数字：" + (eor ^ eorAll0));
+        System.out.println("一种出现了奇数次的数字：" + eor0);
+        System.out.println("另一种出现了奇数次的数字：" + (eor ^ eor0));
 
         return eor;
     }

@@ -1,7 +1,7 @@
-package cn.zandy.algorithm.basic;
+package cn.zandy.algorithm.basic.c01;
 
 import cn.zandy.algorithm.util.ArrayUtils;
-import cn.zandy.algorithm.util.Comparator;
+import cn.zandy.algorithm.util.CompareUtils;
 
 /**
  * 插入排序.
@@ -15,7 +15,7 @@ import cn.zandy.algorithm.util.Comparator;
  * · 让 arr[0~i] 上有序，所以从 arr[i] 开始往前看，arr[i] 这个数不停向左移动，一直移动到左边的数字不再比自己大，停止移动；
  * · 最后一步，让 arr[0~N-1] 上有序，arr[N-1] 这个数不停向左移动，一直移动到左边的数字不再比自己大，停止移动。
  */
-public class B01_03_InsertionSort {
+public class Code_03_InsertionSort {
 
     private void sort(int[] arr) {
         if (arr == null || arr.length < 2) {
@@ -37,6 +37,6 @@ public class B01_03_InsertionSort {
      * 使用对数器测试.
      */
     public static void main(String[] args) {
-        Comparator.compareForSort(new B01_03_InsertionSort()::sort);
+        CompareUtils.compareSortResultWithJDK(new Code_03_InsertionSort()::sort);
     }
 }

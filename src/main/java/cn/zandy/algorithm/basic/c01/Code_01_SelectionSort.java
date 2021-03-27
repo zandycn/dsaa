@@ -1,7 +1,7 @@
-package cn.zandy.algorithm.basic;
+package cn.zandy.algorithm.basic.c01;
 
 import cn.zandy.algorithm.util.ArrayUtils;
-import cn.zandy.algorithm.util.Comparator;
+import cn.zandy.algorithm.util.CompareUtils;
 
 /**
  * 选择排序.
@@ -13,7 +13,7 @@ import cn.zandy.algorithm.util.Comparator;
  * · …
  * · arr[N-2～N-1] 范围上，找到最小值所在的位置，然后把最小值交换到 N-2 位置。
  */
-public class B01_01_SelectionSort {
+public class Code_01_SelectionSort {
 
     private void sort(int[] arr) {
         if (arr == null || arr.length < 2) {
@@ -46,6 +46,6 @@ public class B01_01_SelectionSort {
      * 使用对数器测试.
      */
     public static void main(String[] args) {
-        Comparator.compareForSort(new B01_01_SelectionSort()::sort);
+        CompareUtils.compareSortResultWithJDK(new Code_01_SelectionSort()::sort);
     }
 }
