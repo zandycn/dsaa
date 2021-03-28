@@ -5,6 +5,9 @@ package cn.zandy.algorithm.util;
  */
 public class ArrayUtils {
 
+    /**
+     * 生成长度为 len，元素大小在区间 [0,max] 的数组.
+     */
     public static int[] generateRandomArray(int len, int max) {
         int[] arr = new int[len];
 
@@ -28,6 +31,48 @@ public class ArrayUtils {
                 arr[i] = tmp << 1;
             } else {
                 arr[i] = tmp << 1 | 1;
+            }
+        }
+
+        return arr;
+    }
+
+    /**
+     * 生成这样的数组：
+     * 数组上最后一个数是num，对于num之前的元素，小于num的在左侧，大于num的在右侧，整个数组可能无序。
+     *
+     * @param len 数组的长度
+     * @param num 指定数组上最后一个数
+     */
+    public static int[] generatePartitionArray(int len, int num) {
+        if (len <= 0) {
+            throw new IllegalArgumentException("len必须大于0");
+        }
+        if (num <= 0) {
+            throw new IllegalArgumentException("num必须大于0");
+        }
+
+        int[] arr = new int[len];
+        arr[len - 1] = num;
+
+        if (len > 1) {
+            int otherNumCount = len - 1;
+
+            //  Math.random()                   : [0.0,   1.0)
+            //  Math.random() * num             : [0.0,   num)
+            //  Math.random() + 1               : [1.0,   2.0)
+            // (Math.random() + 1) * (num + 1)  : [num+1, 2num+2)
+
+            int lessthanNumCount = (int) (Math.random() * otherNumCount);
+
+            // 生成比num小的数字，并放到左边
+            for (int i = 0; i < lessthanNumCount; i++) {
+                arr[i] = (int) (Math.random() * num); // 小于 num 的数
+            }
+
+            // 生成比num大的数字，依次放到右边
+            for (int i = lessthanNumCount; i < otherNumCount; i++) {
+                arr[i] = (int) ((Math.random() + 1) * (num + 1)); // 大于 num 的数
             }
         }
 
@@ -149,7 +194,19 @@ public class ArrayUtils {
     }
 
     public static void main(String[] args) {
+        System.out.println("------------随机数组--------------");
         int[] arr = generateRandomArray(10, 10);
         System.out.println(toFormattedString(arr, 0, arr.length - 1));
+        System.out.println("");
+
+        System.out.println("------------连续两数不等(偶奇)数组--------------");
+        int[] arr1 = generateAdjacentUnequalArray(10, 10);
+        System.out.println(toFormattedString(arr1, 0, arr.length - 1));
+        System.out.println("");
+
+        System.out.println("------------以最后一个元素partition的数组--------------");
+        int[] arr2 = generatePartitionArray(10, 10);
+        System.out.println(toFormattedString(arr2, 0, arr.length - 1));
+        System.out.println("");
     }
 }
