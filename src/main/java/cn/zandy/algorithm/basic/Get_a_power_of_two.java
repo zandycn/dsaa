@@ -17,6 +17,8 @@ public class Get_a_power_of_two {
 
     private static final int MAXIMUM_CAPACITY = 1 << 30;
 
+    private static final boolean DEBUG = false;
+
     /**
      * 指定一个数 number, 获取比它大的最小的二次幂数.
      *
@@ -46,17 +48,17 @@ public class Get_a_power_of_two {
         /* -- 分析返回值 --------------------------*/
         if (n < 0) {
             // -- 负数都返回 1 ------------ //
-            System.out.println("n < 0");
+            println("n < 0");
             return 1;
         }
 
         if (n >= MAXIMUM_CAPACITY) {
             // -- 大于 MAXIMUM_CAPACITY 的都返回 MAXIMUM_CAPACITY ------------ //
-            System.out.println("n >= " + MAXIMUM_CAPACITY);
+            println("n >= " + MAXIMUM_CAPACITY);
             return MAXIMUM_CAPACITY;
         } else {
             // -- 所有低位变成1后，加1即可 ------------ //
-            System.out.println("0 <= n < " + MAXIMUM_CAPACITY);
+            println("0 <= n < " + MAXIMUM_CAPACITY);
             return n + 1;
         }
     }
@@ -90,6 +92,14 @@ public class Get_a_power_of_two {
     }
 
     private static void printf(String k, int n) {
-        System.out.printf("%-16s = %-14s = %s(binary)\n", k, n + "(decimal)", Integer.toBinaryString(n));
+        if (DEBUG) {
+            System.out.printf("%-16s = %-14s = %s(binary)\n", k, n + "(decimal)", Integer.toBinaryString(n));
+        }
+    }
+
+    private static void println(String msg) {
+        if (DEBUG) {
+            System.out.println(msg);
+        }
     }
 }
