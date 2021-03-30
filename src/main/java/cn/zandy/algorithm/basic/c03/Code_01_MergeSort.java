@@ -71,7 +71,8 @@ public class Code_01_MergeSort {
         int[] tmpArr = new int[r - l + 1];
         int ti = 0; // tmpArr要存放的位置"指针"
 
-        /* ①当左右两侧都没越界时，比较左侧右侧"指针"指向位置的值大小，把小值放入tmpArr，并向右移动小值所在一侧的"指针"。注：当值相等时我们取了左侧） */
+        /* ①当左右两侧都没越界时，比较左侧右侧"指针"指向位置的值大小，把小值放入tmpArr，并向右移动小值所在一侧的"指针"。
+           注：当值相等时我们取了左侧） */
         while (li <= mid && ri <= r) {
             if (arr[li] <= arr[ri]) {
                 tmpArr[ti] = arr[li];
@@ -106,7 +107,7 @@ public class Code_01_MergeSort {
     }
 
     /**
-     * 【非递归实现】
+     * 【非递归实现——1】
      * 每相邻2个元素为一组，调用merge将每组排好序；
      * 每相邻4个元素为一组，调用merge将每组排好序；
      * 每相邻8个元素为一组，调用merge将每组排好序；
@@ -139,10 +140,15 @@ public class Code_01_MergeSort {
             }
         }
 
-        /* ② 最后保证整体有序 */
-        merge(arr, 0, maxGroupSize - 1, len - 1);
+        /* ② 保证整体有序（当 maxGroupSize==arr.length 时，① 中已经保证整体有序了） */
+        if (maxGroupSize != arr.length) {
+            merge(arr, 0, maxGroupSize - 1, len - 1);
+        }
     }
 
+    /**
+     * 【非递归实现——2】
+     */
     private void iterativeSortByPower(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
@@ -170,8 +176,14 @@ public class Code_01_MergeSort {
     }
 
     public static void main(String[] args) {
-        //CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByLower, 1, 10, 100);
-        //CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByPower, 1, 10, 100);
+        CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByPower, 1, 10, 100);
+        System.out.println("--------------------------");
+        CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByLower, 1, 10, 100);
+        System.out.println("====================================================");
+        CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByPower, 1, 16, 100);
+        System.out.println("--------------------------");
+        CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByLower, 1, 16, 100);
+        System.out.println("====================================================");
         CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::recurSort);
         System.out.println("====================================================");
         CompareUtils.compareSortResultWithJDK(new Code_01_MergeSort()::iterativeSortByLower);
