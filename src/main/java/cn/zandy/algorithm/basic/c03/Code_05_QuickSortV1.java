@@ -71,6 +71,7 @@ public class Code_05_QuickSortV1 {
      * 使用对数器测试.
      */
     public static void main(String[] args) {
+        //CompareUtils.compareSortResultWithJDK(new Code_05_QuickSortV1()::sort, 1, 10, 1);
         //CompareUtils.compareSortResultWithJDK(new Code_05_QuickSortV1()::sort, 1, 10, 100);
         CompareUtils.compareSortResultWithJDK(new Code_05_QuickSortV1()::sort);
     }

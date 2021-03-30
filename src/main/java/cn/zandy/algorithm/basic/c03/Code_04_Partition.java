@@ -57,6 +57,11 @@ public class Code_04_Partition {
      * @return 返回只有两个元素的int数组
      */
     private int[] flagOfNED(int[] arr, int num) {
+        if (arr == null) {
+            return new int[] {-1, -1};
+        }
+
+        /*
         int lti = -1;         // 小于区开始指针位置
         int gti = arr.length; // 大于区开始指针位置
         int i = 0;            // 遍历指针：代表下一次要检查的位置
@@ -78,6 +83,41 @@ public class Code_04_Partition {
         // 元素一: 数组中最后一个小于num的元素位置，若没有则返回-1
         // 元素二: 数组中第一个大于num的元素位置，若没有则返回-1
         return new int[] {lti, gti == arr.length ? -1 : gti};
+        */
+
+        return flagOfNED(arr, num, 0, arr.length - 1);
+    }
+
+    public int[] flagOfNED(int[] arr, int num, int l, int r) {
+        if (arr == null || arr.length == 0) {
+            return new int[] {-1, -1};
+        }
+
+        ParamCheckUtils.checkLR(arr.length, l, r);
+
+        int lti = l - 1;  // 小于区开始指针位置
+        int gti = r + 1;  // 大于区开始指针位置
+        int i = l;        // 遍历指针：代表下一次要检查的位置
+
+        // ① arr[i] < num, [i] 与 小于区右测元素交换，小于区右扩，遍历指针右移(i++)
+        // ② arr[i] == num, 此时只需右移遍历指针(i++)
+        // ③ arr[i] > num, [i] 与 大于区左测元素交换，大于区左扩，遍历指针不动
+        while (i < gti) {
+            if (arr[i] < num) {
+                ArrayUtils.swap(arr, i++, ++lti);
+            } else if (arr[i] == num) {
+                i++;
+            } else {
+                ArrayUtils.swap(arr, i, --gti);
+            }
+        }
+
+        // 返回值:
+        // 元素一: 数组中最后一个小于num的元素位置，若没有则返回-1
+        // 元素二: 数组中第一个大于num的元素位置，若没有则返回-1
+        lti = (lti == l - 1) ? -1 : lti; // 没动地方返回 -1; 动了取值范围 [l, r]
+        gti = (gti == r + 1) ? -1 : gti; // 没动地方返回 -1, 动了取值范围 [l, r]
+        return new int[] {lti, gti};
     }
 
     private int[] flagOfNED1(int[] arr, int num) {
@@ -100,6 +140,10 @@ public class Code_04_Partition {
     }
 
     public static void main(String[] args) {
+        //int[] arr = {1, 2, 5, 6};
+        //int[] r = new Code_04_Partition().flagOfNED(arr, 3);
+        //System.out.println(ArrayUtils.toString(r));
+
         testFlagOfNED();
     }
 
