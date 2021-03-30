@@ -1,6 +1,7 @@
 package cn.zandy.algorithm.basic.c03;
 
 import cn.zandy.algorithm.util.ArrayUtils;
+import cn.zandy.algorithm.util.ParamCheckUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,19 +16,37 @@ public class Code_04_Partition {
      * 要求额外空间复杂度O(1)，时间复杂度O(N)
      */
     private void partition(int[] arr, int num) {
-        int lti = -1;
+        if (arr == null) {
+            return;
+        }
 
-        int i = 0;
+        partition(arr, num, 0, arr.length - 1);
+    }
+
+    /**
+     * @return 返回数组中第一个大于num的元素位置，若没有则返回-1
+     */
+    public int partition(int[] arr, int num, int l, int r) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+
+        ParamCheckUtils.checkLR(arr.length, l, r);
+
+        int lti = l - 1; // 小于区开始指针位置
+        int i = l;       // 遍历指针：代表下一次要检查的位置
 
         // ① arr[i] <= num, [i] 与 小于区右测元素交换，小于区右扩，遍历指针右移(i++)
         // ② arr[i] > num, 此时只需右移遍历指针(i++)
-        while (i <= arr.length - 1) {
+        while (i <= r) {
             if (arr[i] <= num) {
                 ArrayUtils.swap(arr, i++, ++lti);
             } else {
                 i++;
             }
         }
+
+        return (lti + 1) > r ? -1 : lti + 1;
     }
 
     /**

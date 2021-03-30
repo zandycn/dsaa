@@ -4,6 +4,7 @@ import cn.zandy.algorithm.basic.Get_a_lower_of_two;
 import cn.zandy.algorithm.basic.Get_a_power_of_two;
 import cn.zandy.algorithm.util.ArrayUtils;
 import cn.zandy.algorithm.util.CompareUtils;
+import cn.zandy.algorithm.util.ParamCheckUtils;
 
 /**
  * 归并排序.
@@ -35,9 +36,7 @@ public class Code_01_MergeSort {
             return;
         }
 
-        if (l > r || l < 0 || r > arr.length - 1) {
-            throw new IllegalArgumentException("传入位置参数错误");
-        }
+        ParamCheckUtils.checkLR(arr.length, l, r);
 
         // "范围"只对应数组中一个元素，那一定有序，不需要再拆分，直接返回（这种情况就是 Base Case）
         if (l == r) {

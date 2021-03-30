@@ -1,6 +1,7 @@
 package cn.zandy.algorithm.basic.c03;
 
 import cn.zandy.algorithm.util.ArrayUtils;
+import cn.zandy.algorithm.util.ParamCheckUtils;
 
 /**
  * 数组小和问题：
@@ -41,9 +42,7 @@ public class Code_02_UsingMergeSort_MSum {
             return 0;
         }
 
-        if (l > r || l < 0 || r > arr.length - 1) {
-            throw new IllegalArgumentException("传入位置参数错误");
-        }
+        ParamCheckUtils.checkLR(arr.length, l, r);
 
         if (l == r) {
             return 0;
