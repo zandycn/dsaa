@@ -26,13 +26,15 @@ public class Code_05_QuickSortV2 {
             return;
         }
 
-        recursion(arr, 0, arr.length - 1);
+        recursion(arr, 0, arr.length - 1, false);
     }
 
     /**
      * 递归函数定义：保证数组 l->r 范围内有序.
+     *
+     * @param isRandomQuickSort true-随机快排(for v3)  false-(for v2)
      */
-    private void recursion(int[] arr, int l, int r) {
+    void recursion(int[] arr, int l, int r, final boolean isRandomQuickSort) {
         if (l == r) {
             return;
         }
@@ -42,6 +44,11 @@ public class Code_05_QuickSortV2 {
             System.out.println("第" + (++c) + "次递归【开始】，范围 [" + l + ", " + r + "]");
             System.out.println(ArrayUtils.toFormattedString(arr, 0, arr.length - 1));
             System.out.println("");
+        }
+
+        if (isRandomQuickSort) {
+            // 随机快排，将 l->r 任意一个位置值与 arr[r] 交换
+            ArrayUtils.swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
         }
 
         int[] indexArr = ins.flagOfNED(arr, arr[r], l, r - 1);
@@ -62,13 +69,13 @@ public class Code_05_QuickSortV2 {
         } else {
             if (firstLargerIndex == -1) {
                 // 这里 lastLessIndex 一定不是 -1
-                recursion(arr, l, lastLessIndex);
+                recursion(arr, l, lastLessIndex, isRandomQuickSort);
             } else {
                 ArrayUtils.swap(arr, firstLargerIndex, r);
-                recursion(arr, firstLargerIndex + 1, r);
+                recursion(arr, firstLargerIndex + 1, r, isRandomQuickSort);
 
                 if (lastLessIndex != -1) {
-                    recursion(arr, l, lastLessIndex);
+                    recursion(arr, l, lastLessIndex, isRandomQuickSort);
                 }
             }
         }
