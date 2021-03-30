@@ -3,6 +3,7 @@ package cn.zandy.algorithm.util;
 import java.util.Arrays;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -174,5 +175,37 @@ public class CompareUtils {
             + differentCount
             + ", exceptionCount="
             + exceptionCount);
+    }
+
+    public static void compareIntResult(int not, int len, int max, Function<int[], Integer> func1,
+        Function<int[], Integer> func2) {
+        not = not <= 0 ? DEFAULT_NOT : not;
+        len = len <= 0 ? DEFAULT_LEN : len;
+        max = max <= 0 ? DEFAULT_MAX : max;
+
+        int[] arr;
+        boolean result = true;
+        int r1, r2;
+
+        long start = System.currentTimeMillis();
+        for (int i = 1; i <= not; i++) {
+            arr = ArrayUtils.generateRandomArray(len, max);
+            //System.out.println("arr : " + ArrayUtils.toString(arr));
+
+            r1 = func1.apply(arr);
+            r2 = func2.apply(arr);
+
+            result = r1 == r2;
+
+            if (!result) {
+                System.out.println("第" + i + "次测试时，出现差异！");
+                System.out.println("array : " + ArrayUtils.toString(arr));
+                System.out.println("------------");
+                break;
+            }
+        }
+
+        System.out.println("对比结果：" + (result ? "无差异" : "存在差异！"));
+        System.out.println("耗时：" + ((System.currentTimeMillis() - start) / 1000) + "秒");
     }
 }

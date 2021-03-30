@@ -1,6 +1,7 @@
 package cn.zandy.algorithm.basic.c03;
 
 import cn.zandy.algorithm.util.ArrayUtils;
+import cn.zandy.algorithm.util.CompareUtils;
 import cn.zandy.algorithm.util.ParamCheckUtils;
 
 /**
@@ -138,42 +139,12 @@ public class Code_02_UsingMergeSort_MSum {
         return sum;
     }
 
-    private static void test() {
-        int not = 500000;
-        int len = 200;
-        int max = 100;
-
-        int[] arr;
-        boolean result = true;
-
-        long start = System.currentTimeMillis();
-        for (int i = 1; i <= not; i++) {
-            arr = ArrayUtils.generateRandomArray(len, max);
-            //System.out.println("arr : " + ArrayUtils.toString(arr));
-
-            int r2 = getMSum1(arr);
-            int r1 = getMSum(arr);
-
-            result = r1 == r2;
-
-            if (!result) {
-                System.out.println("第" + i + "次测试时，出现差异！");
-                System.out.println("array : " + ArrayUtils.toString(arr));
-                System.out.println("------------");
-                break;
-            }
-        }
-
-        System.out.println("对比结果：" + (result ? "无差异" : "存在差异！"));
-        System.out.println("耗时：" + ((System.currentTimeMillis() - start) / 1000) + "秒");
-    }
-
     public static void main(String[] args) {
         int[] arr = new int[] {2, 3, 6, 5, 1, 4};
         System.out.println(getMSum1(arr));
         System.out.println(getMSum(arr));
         System.out.println("====================================================");
 
-        test();
+        CompareUtils.compareIntResult(500000, 200, 100, (a) -> getMSum1(a), (a) -> getMSum(a));
     }
 }

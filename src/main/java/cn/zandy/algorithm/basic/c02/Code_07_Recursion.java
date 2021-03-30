@@ -1,6 +1,7 @@
 package cn.zandy.algorithm.basic.c02;
 
 import cn.zandy.algorithm.util.ArrayUtils;
+import cn.zandy.algorithm.util.CompareUtils;
 import cn.zandy.algorithm.util.ParamCheckUtils;
 
 /**
@@ -59,36 +60,6 @@ public class Code_07_Recursion {
 
         System.out.println("==========================");
 
-        test();
-    }
-
-    private static void test() {
-        int not = 500000;
-        int len = 200;
-        int max = 200;
-
-        int[] arr;
-        boolean result = true;
-
-        long start = System.currentTimeMillis();
-        for (int i = 1; i <= not; i++) {
-            arr = ArrayUtils.generateRandomArray(len, max);
-            //System.out.println("arr : " + ArrayUtils.toString(arr));
-
-            int r1 = getMax(arr);
-            int r2 = getMax1(arr);
-
-            result = r1 == r2;
-
-            if (!result) {
-                System.out.println("第" + i + "次测试时，出现差异！");
-                System.out.println("array : " + ArrayUtils.toString(arr));
-                System.out.println("------------");
-                break;
-            }
-        }
-
-        System.out.println("对比结果：" + (result ? "无差异" : "存在差异！"));
-        System.out.println("耗时：" + ((System.currentTimeMillis() - start) / 1000) + "秒");
+        CompareUtils.compareIntResult(500000, 200, 200, Code_07_Recursion::getMax, Code_07_Recursion::getMax1);
     }
 }
