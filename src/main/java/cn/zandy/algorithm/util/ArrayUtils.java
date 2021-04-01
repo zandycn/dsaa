@@ -1,5 +1,7 @@
 package cn.zandy.algorithm.util;
 
+import java.util.function.IntFunction;
+
 /**
  * 数组工具类.
  */
@@ -105,6 +107,19 @@ public class ArrayUtils {
         return copy;
     }
 
+    public static Integer[] boxing(int[] arr) {
+        if (arr == null) {
+            return null;
+        }
+
+        Integer[] ar = new Integer[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            ar[i] = arr[i];
+        }
+
+        return ar;
+    }
+
     /**
      * java.util.Arrays.equals(int[] a, int[] a2)
      */
@@ -187,10 +202,45 @@ public class ArrayUtils {
         arr[idx2] = temp;
     }
 
+    public static void swap(Integer[] arr, int idx1, int idx2) {
+        Integer temp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = temp;
+    }
+
     public static void swap1(int[] arr, int idx1, int idx2) {
         arr[idx1] = arr[idx1] ^ arr[idx2];
         arr[idx2] = arr[idx1] ^ arr[idx2];
         arr[idx1] = arr[idx1] ^ arr[idx2];
+    }
+
+    public static <T extends Comparable<?>> BTreePrinter.Node<T> array2Tree(T[] arr,
+        IntFunction<Integer> getLeftNodeIndex, IntFunction<Integer> getRightNodeIndex) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+
+        BTreePrinter.Node<T> head = new BTreePrinter.Node<>(arr[0]);
+
+        buildTree(arr, 0, head, getLeftNodeIndex, getRightNodeIndex);
+
+        return head;
+    }
+
+    private static <T extends Comparable<?>> void buildTree(T[] arr, int i, BTreePrinter.Node<T> inode,
+        IntFunction<Integer> getLeftNodeIndex, IntFunction<Integer> getRightNodeIndex) {
+
+        Integer leftNodeIndex = getLeftNodeIndex.apply(i);
+        if (leftNodeIndex != null) {
+            inode.left = new BTreePrinter.Node<>(arr[leftNodeIndex]);
+            buildTree(arr, leftNodeIndex, inode.left, getLeftNodeIndex, getRightNodeIndex);
+        }
+
+        Integer rightNodeIndex = getRightNodeIndex.apply(i);
+        if (rightNodeIndex != null) {
+            inode.right = new BTreePrinter.Node<>(arr[rightNodeIndex]);
+            buildTree(arr, rightNodeIndex, inode.right, getLeftNodeIndex, getRightNodeIndex);
+        }
     }
 
     public static void main(String[] args) {
