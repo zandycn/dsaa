@@ -51,7 +51,7 @@ public class Code_01_LinkedList<T> {
         }
 
         tail = head;
-        tail.next = null;
+        //tail.next = null;
         head = pre;
     }
 
