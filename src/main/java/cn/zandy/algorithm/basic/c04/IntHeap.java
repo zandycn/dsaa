@@ -37,7 +37,9 @@ import cn.zandy.algorithm.util.BTreePrinter;
  * 第2种方法通过 heapify, 因为是【从下向上】进行调整，每层【元素数量由多变少】【调整代价由小变大】，所以复杂度相对低一些
  *
  * <p>
- * 说明：此类默认是【大根堆】的实现. {@link java.util.PriorityQueue}
+ * 说明：此类默认是【大根堆】的实现.
+ *
+ * {@link java.util.PriorityQueue} 默认是【小根堆】的实现.
  */
 public final class IntHeap implements Heap<Integer> {
 
